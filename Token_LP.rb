@@ -188,11 +188,21 @@ rescue Faraday::BadRequestError => e
   raise
 end
 
-puts "🎉 LIQUIDITY DEPOSIT SUCCESSFUL"
+puts "#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#"
+puts "    🎉🎉🎉 LIQUIDITY DEPOSIT SUCCESSFUL 🎉🎉🎉    "
+puts "#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#._.#-*-#"
 puts "Pool ID: #{pool.id}"
 puts "Tx Hash: #{resp['hash']}"
 puts "Ledger: #{resp['ledger']}"
-
+# = #-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#
+# Creating ini LP data file
+# = #-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#_#-*-#._.#-*-#
+File.open("#{TOKEN_CODE}_LP.ini", "w") do |f|
+  f.puts "[#{TOKEN_CODE} LiquidityPool]"
+  f.puts "Pool ID = #{pool.id}"
+  f.puts "Tx Hash = #{resp['hash']}"
+  f.puts "Ledger = #{resp['ledger']}"
+end
 # =====================================================
 # VERIFY LP SHARES
 # =====================================================
@@ -209,3 +219,4 @@ if lp_share
 else
   puts "⚠️ LP shares not found yet (check Horizon explorer)"
 end
+
